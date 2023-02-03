@@ -6,8 +6,10 @@ import ImagesSearchForm from './ImagesSearchForm/ImagesSearchForm';
 import ImagesList from './ImagesList/ImagesList';
 import Modal from 'shared/components/Modal/Modal';
 import LargeImage from './LargeImage/LargeImage';
+import Loader from 'shared/components/Loader/Loader';
 
 import { searchImages } from 'shared/services/images-api';
+import styles from './images-search.module.scss';
 
 class ImagesSearch extends Component {
   state = {
@@ -87,9 +89,11 @@ class ImagesSearch extends Component {
 
         <ImagesList items={items} showImage={showImage} />
         {error && <p>{error.message}</p>}
-        {loading && <p>...Loading</p>}
+        {loading && <Loader />}
         {items.length > 0 && items.length < totalHits && (
-          <button onClick={loadMore}>Load more</button>
+          <button className={styles.button} onClick={loadMore}>
+            Load more
+          </button>
         )}
         {showModal && (
           <Modal close={closeModal}>
